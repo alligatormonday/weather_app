@@ -24,7 +24,7 @@ $.ajax({
         $("#city").html("<h1>" + response.name + "</h1>");
         $("#wind").text("Wind Speed: " + response.wind.speed);
         $("#humidity").text("Humidity: " + response.main.humidity);
-        // $("#uv"),text("UV Index " + response.)
+        
 
         // Convert the temp to fahrenheit
         let temp = (response.main.temp - 273.15) * 1.80 + 32;
@@ -37,6 +37,22 @@ $.ajax({
         console.log("Wind Speed: " + response.wind.speed);
         console.log("Humidity: " + response.main.humidity);
         console.log("Temperature (F): " + temp);
+
+        let uvQuery = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon;
+        console.log(uvQuery)
+        
+        $.ajax({
+            url: uvQuery,
+            method: "GET"
+        })
+        .then(function(res){
+            console.log(res)
+            $("#uv").text("UV Index: " + res.value);
+            console.log("UV")
+        })
+
+        
+       
 
 
     });
