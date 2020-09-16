@@ -23,7 +23,7 @@ $(document).ready(function () {
     // Log the resulting object
     console.log(response);
 
-    $("#city").html("<h1>" + response.name + "</h1>");
+    $("#city").html("<h3>" + response.name + "</h3>");
     $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
     $("#humidity").text("Humidity: " + response.main.humidity + "%");
 
@@ -70,9 +70,28 @@ $(document).ready(function () {
         console.log(forecast);
 
         let list = forecast.list;
+        console.log(list)
 
-        for (let i = 7; i < list.length; i + 8) {
+        for (let i = 7; i < list.length; i ++){
           // append forecast box
+          if ((i + 1) % 8 === 0){
+              console.log(i)
+            // create variables from forecast data
+            let forecastDate = list[i].dt_txt.split(" ")[0]
+            console.log(typeof forecastDate)
+            // populate template with forecast data
+            let forecastDay = `<div class="card bg-light mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+              <h4 class="card-title">${forecastDate}</h4>
+              <p class="card-text"></p>
+            </div>
+          </div>`
+          console.log(forecastDay)
+            // append template to html
+            $("#forecast-container").append(forecastDay);
+
+          }
+         
         }
       });
     });
