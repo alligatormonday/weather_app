@@ -4,9 +4,10 @@ $(document).ready(function () {
 
 let APIKey = "ce818fa75a8998632b2becab04bcb211";
 
+let location = "Tempe";
+
 // Here we are building the URL we need to query the database
-let queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-    "q=Tempe,Arizona&appid=" + APIKey;
+let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
 
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
@@ -49,6 +50,24 @@ $.ajax({
             console.log(res)
             $("#uv").text("UV Index: " + res.value);
             console.log("UV")
+
+        let fiveDayQuery = "http://api.openweathermap.org/data/2.5/forecast?q=" + location + "&appid=" + APIKey;
+        console.log(fiveDayQuery)
+
+        $.ajax({
+            url: fiveDayQuery,
+            method: "GET"
+        })
+        .then(function(forecast){
+            console.log(forecast)
+
+            let list = forecast.list;
+        
+            for (let i = 7; i < list.length; i+8){
+                // append forecast box
+
+            }
+        })
         })
 
         
