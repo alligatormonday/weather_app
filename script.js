@@ -10,7 +10,8 @@ $(document).ready(function () {
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     location +
     "&appid=" +
-    APIKey;
+    APIKey +
+    "&units=imperial";
 
   // Here we run our AJAX call to the OpenWeatherMap API
   $.ajax({
@@ -28,11 +29,11 @@ $(document).ready(function () {
     $("#humidity").text("Humidity: " + response.main.humidity + "%");
 
     // Convert the temp to fahrenheit
-    let temp = (response.main.temp - 273.15) * 1.8 + 32;
+    // let temp = (response.main.temp - 273.15) * 1.8 + 32;
 
     // add temp content to html
     // $("#temp").text("Temperature (K) " + response.main.temp);
-    $("#temp").text("Temperature: " + temp.toFixed(2) + " ℉");
+    $("#temp").text("Temperature: " + response.main.temp + " ℉");
 
     // Log the data in the console as well
     console.log("Wind Speed: " + response.wind.speed);
@@ -60,7 +61,8 @@ $(document).ready(function () {
         "http://api.openweathermap.org/data/2.5/forecast?q=" +
         location +
         "&appid=" +
-        APIKey;
+        APIKey +
+        "&units=imperial";
       console.log(fiveDayQuery);
 
       $.ajax({
@@ -70,28 +72,29 @@ $(document).ready(function () {
         console.log(forecast);
 
         let list = forecast.list;
-        console.log(list)
+        console.log(list);
 
-        for (let i = 7; i < list.length; i ++){
+        for (let i = 7; i < list.length; i++) {
           // append forecast box
-          if ((i + 1) % 8 === 0){
-              console.log(i)
+          if ((i + 1) % 8 === 0) {
+            console.log(i);
             // create variables from forecast data
-            let forecastDate = list[i].dt_txt.split(" ")[0]
-            console.log(typeof forecastDate)
+            let forecastDate = list[i].dt_txt.split(" ")[0];
+            console.log(typeof forecastDate);
             // populate template with forecast data
-            let forecastDay = `<div class="card bg-light mb-3" style="max-width: 20rem;">
+            let forecastDay = `<div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
             <div class="card-body">
               <h4 class="card-title">${forecastDate}</h4>
-              <p class="card-text"></p>
+              <img alt="weather icon" src="https://openweathermap.org/img/wn/${list[i].weather[0].icon}@2x.png"/>
+              <p class="card-text">Temperature: ${list[i].main.temp} ℉</p>
+              <p class="card-text">Humidity: ${list[i].main.humidity}%</p>
             </div>
-          </div>`
-          console.log(forecastDay)
+          </div>`;
+            console.log(forecastDay);
+
             // append template to html
             $("#forecast-container").append(forecastDay);
-
           }
-         
         }
       });
     });
