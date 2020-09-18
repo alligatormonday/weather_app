@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   let location = "Tempe";
 
-  // Here we are building the URL we need to query the database
+  // URL we need to query the OpenWeatherMap API
   let queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     location +
@@ -13,7 +13,7 @@ $(document).ready(function () {
     APIKey +
     "&units=imperial";
 
-  // Here we run our AJAX call to the OpenWeatherMap API
+  // AJAX call to the OpenWeatherMap API
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -28,11 +28,6 @@ $(document).ready(function () {
     $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
     $("#humidity").text("Humidity: " + response.main.humidity + "%");
 
-    // Convert the temp to fahrenheit
-    // let temp = (response.main.temp - 273.15) * 1.8 + 32;
-
-    // add temp content to html
-    // $("#temp").text("Temperature (K) " + response.main.temp);
     $("#temp").text("Temperature: " + response.main.temp + " ℉");
 
     // Log the data in the console as well
@@ -41,7 +36,7 @@ $(document).ready(function () {
     console.log("Temperature: " + temp);
 
     let uvQuery =
-      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+       "http://api.openweathermap.org/data/2.5/uvi?appid=" +
       APIKey +
       "&lat=" +
       response.coord.lat +
