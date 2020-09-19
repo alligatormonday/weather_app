@@ -5,13 +5,28 @@ $(document).ready(function () {
 
   let location = "Tempe";
 
-  // URL we need to query the OpenWeatherMap API
+  // URL to query the OpenWeatherMap API
   let queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     location +
     "&appid=" +
     APIKey +
     "&units=imperial";
+
+  let citySearch = `<form id="city-form" class="form-inline my-2 my-lg-0 pt-2">
+    <input id="city-input" class="form-control mr-sm-2" type="text" placeholder="City">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  </form>`;
+  $("#city-search").append(citySearch);
+
+$("#city-form").on("submit", function(event){
+    event.preventDefault();
+    $("#city-input")
+    console.log()
+})
+
+// ajax call in a function
+
 
   // AJAX call to the OpenWeatherMap API
   $.ajax({
@@ -36,7 +51,7 @@ $(document).ready(function () {
     console.log("Temperature: " + temp);
 
     let uvQuery =
-       "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
       APIKey +
       "&lat=" +
       response.coord.lat +
@@ -77,7 +92,7 @@ $(document).ready(function () {
             let forecastDate = list[i].dt_txt.split(" ")[0];
             console.log(typeof forecastDate);
             // populate template with forecast data
-            let forecastDay = `<div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+            let forecastDay = `<div class="text-white bg-warning mb-3" style="max-width: 20rem;">
             <div class="card-body">
               <h4 class="card-title">${forecastDate}</h4>
               <img alt="weather icon" src="https://openweathermap.org/img/wn/${list[i].weather[0].icon}@2x.png"/>
