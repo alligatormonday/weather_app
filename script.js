@@ -7,11 +7,6 @@ $(document).ready(function () {
 
   let queryURL = "";
 
-  
-
-  // URL to query the OpenWeatherMap API
-  
-
   let citySearch = `<form id="city-form" class="form-inline my-2 my-lg-0 pt-2">
     <input id="city-input" class="form-control mr-sm-2" type="text" placeholder="City">
     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -20,7 +15,7 @@ $(document).ready(function () {
 
 $("#city-form").on("submit", function(event){
     event.preventDefault();
-    // Clear five day forecast
+    // Clear five day forecast?
     location = $("#city-input").val();
     
     queryURL =
@@ -31,13 +26,13 @@ $("#city-form").on("submit", function(event){
     "&units=imperial";
 
     weatherSearch()
-    let forecastHistory = $("<li>");
+    let forecastHistory = $("<button>");
     forecastHistory.addClass("saved-location");
     forecastHistory.text($("#city-input").val());
-    $(".location-history").append(forecastHistory);
+    $(".location-list").append(forecastHistory);
     console.log(forecastHistory)
     
-    
+
 
     // $("#city-input").val()
     // console.log($("#city-input").val())
@@ -62,7 +57,7 @@ function weatherSearch(){
 
     $("#temp").text("Temperature: " + response.main.temp + " ℉");
 
-    // Log the data in the console as well
+    // Log the data in the console
     console.log("Wind Speed: " + response.wind.speed);
     console.log("Humidity: " + response.main.humidity);
     console.log("Temperature: " + temp);
@@ -129,6 +124,10 @@ function weatherSearch(){
     });
   });
 }
+$(".location-list").on("click", function(){
+    weatherSearch();
+})
+
 });
 
 // GIVEN a weather dashboard with form inputs
