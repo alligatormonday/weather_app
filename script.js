@@ -3,15 +3,12 @@ $(document).ready(function () {
 
   let APIKey = "ce818fa75a8998632b2becab04bcb211";
 
-  let location = "Tempe";
+  let location = "";
+
+  let queryURL = "";
 
   // URL to query the OpenWeatherMap API
-  let queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
-    location +
-    "&appid=" +
-    APIKey +
-    "&units=imperial";
+  
 
   let citySearch = `<form id="city-form" class="form-inline my-2 my-lg-0 pt-2">
     <input id="city-input" class="form-control mr-sm-2" type="text" placeholder="City">
@@ -21,12 +18,20 @@ $(document).ready(function () {
 
 $("#city-form").on("submit", function(event){
     event.preventDefault();
-    $("#city-input")
-    console.log()
+    // Clear five day forecast
+    location = $("#city-input").val();
+    
+    queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    location +
+    "&appid=" +
+    APIKey +
+    "&units=imperial";
+
+    weatherSearch()
 })
 
-// ajax call in a function
-
+function weatherSearch(){
 
   // AJAX call to the OpenWeatherMap API
   $.ajax({
@@ -109,6 +114,7 @@ $("#city-form").on("submit", function(event){
       });
     });
   });
+}
 });
 
 // GIVEN a weather dashboard with form inputs
