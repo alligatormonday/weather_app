@@ -7,6 +7,8 @@ $(document).ready(function () {
 
   let queryURL = "";
 
+  
+
   // URL to query the OpenWeatherMap API
   
 
@@ -29,6 +31,16 @@ $("#city-form").on("submit", function(event){
     "&units=imperial";
 
     weatherSearch()
+    let forecastHistory = $("<li>");
+    forecastHistory.addClass("saved-location");
+    forecastHistory.text($("#city-input").val());
+    $(".location-history").append(forecastHistory);
+    console.log(forecastHistory)
+    
+    
+
+    // $("#city-input").val()
+    // console.log($("#city-input").val())
 })
 
 function weatherSearch(){
@@ -109,6 +121,8 @@ function weatherSearch(){
 
             // append template to html
             $("#forecast-container").append(forecastDay);
+            
+           
           }
         }
       });
