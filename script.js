@@ -17,6 +17,9 @@ $(document).ready(function () {
   // Append 'citySearch' to the HTML
     $("#city-search").append(citySearch);
 
+    $("#date").text(moment().format("[Forecast for:] MM/D/YYYY"));
+
+
   // Click-Event to search for a city
     $("#city-form").on("submit", function (event) {
     event.preventDefault();
@@ -122,7 +125,7 @@ $(document).ready(function () {
         console.log(i);
             // create variables from forecast data
             let forecastDate = list[i].dt_txt.split(" ")[0];
-            console.log(typeof forecastDate);
+            // console.log(typeof forecastDate);
             // populate template with forecast data
             let forecastDay = `<div class="text-white bg-warning mb-3" style="max-width: 20rem;">
             <div class="card-body">
