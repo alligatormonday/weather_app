@@ -45,21 +45,12 @@ $(document).ready(function () {
     console.log(forecastHistory);
     });
 
-  // $(".location-list").on("click", function(event){
-  //     event.preventDefault();
-  //     $("#forecast-container").empty();
-
-  //     location = $("#city-input").val();
-
-  //     queryURL =
-  //     "https://api.openweathermap.org/data/2.5/weather?q=" +
-  //     location +
-  //     "&appid=" +
-  //     APIKey +
-  //     "&units=imperial";
-
-  //     weatherSearch()
-  // })
+    $(".location-list").on("click", function(event){
+    event.preventDefault();
+    $("#forecast-container").empty();
+    
+    weatherSearch()
+    })
 
   // Contains all AJAX calls
     function weatherSearch() {
@@ -100,6 +91,13 @@ $(document).ready(function () {
     }).then(function (res) {
         console.log(res);
         $("#uv").text("UV Index: " + res.value);
+        if (res.value < 3){
+            $("#uv").addClass("text-white bg-success");
+        }else if (res.value >= 3 && res.value < 6){
+            $("#uv").addClass("text-white bg-danger");
+        }else if (res.value >= 6){
+            $("#uv").addClass("text-white bg-primary");
+        }
         console.log("UV");
 
         let fiveDayQuery =
@@ -120,7 +118,7 @@ $(document).ready(function () {
         console.log(list);
 
         for (let i = 7; i < list.length; i++) {
-        // append forecast box
+        // Five Day Forecast cards
         if ((i + 1) % 8 === 0) {
         console.log(i);
             // create variables from forecast data
