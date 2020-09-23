@@ -75,7 +75,7 @@ $(document).ready(function () {
             console.log("Temperature: " + temp);
 
             let uvQuery =
-                "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+                "https://api.openweathermap.org/data/2.5/uvi?appid=" +
                 APIKey +
                 "&lat=" +
                 response.coord.lat +
@@ -100,7 +100,7 @@ $(document).ready(function () {
                 console.log("UV");
 
                 let fiveDayQuery =
-                    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+                    "https://api.openweathermap.org/data/2.5/forecast?q=" +
                     location +
                     "&appid=" +
                     APIKey +
