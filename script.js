@@ -2,9 +2,9 @@
 $(document).ready(function () {
     console.log("document loaded");
 
-    // Variables
     let APIKey = "ce818fa75a8998632b2becab04bcb211";
 
+    // City Search/Submit Form
     const citySearch = `<form id="city-form" class="form-inline my-2 my-lg-0 pt-2">
     <input id="city-input" class="form-control mr-sm-2" type="text" placeholder="City">
     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -13,6 +13,7 @@ $(document).ready(function () {
     // Append 'citySearch' to the HTML
     $("#city-search").append(citySearch);
 
+    // Renders current date for the 'day of' forecast
     $("#date").text(moment().format("[Forecast for:] MM/D/YYYY"));
 
     // Click-Event to search for a city
@@ -22,8 +23,6 @@ $(document).ready(function () {
         $("#forecast-container").empty();
 
         let location = $("#city-input").val();
-
-        
 
         weatherSearch(location);
 
@@ -35,6 +34,7 @@ $(document).ready(function () {
         console.log(forecastHistory);
     });
 
+    // Renders previous searched cities forecast on click
     $(document).on("click", ".saved-location", function (event) {
         event.preventDefault();
         $("#forecast-container").empty();
@@ -124,13 +124,13 @@ $(document).ready(function () {
                             // console.log(typeof forecastDate);
                             // populate template with forecast data
                             let forecastDay = `<div class="text-white bg-warning mb-3" style="max-width: 20rem;">
-            <div class="card-body">
-            <h4 class="card-title">${forecastDate}</h4>
-            <img alt="weather icon" src="https://openweathermap.org/img/wn/${list[i].weather[0].icon}@2x.png"/>
-            <p class="card-text">Temperature: ${list[i].main.temp} ℉</p>
-            <p class="card-text">Humidity: ${list[i].main.humidity}%</p>
-            </div>
-        </div>`;
+                            <div class="card-body">
+                            <h4 class="card-title">${forecastDate}</h4>
+                            <img alt="weather icon" src="https://openweathermap.org/img/wn/${list[i].weather[0].icon}@2x.png"/>
+                            <p class="card-text">Temperature: ${list[i].main.temp} ℉</p>
+                            <p class="card-text">Humidity: ${list[i].main.humidity}%</p>
+                            </div>
+                            </div>`;
                             console.log(forecastDay);
 
                             // append template to html
