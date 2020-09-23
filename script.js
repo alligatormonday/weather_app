@@ -88,6 +88,7 @@ $(document).ready(function () {
                 method: "GET",
             }).then(function (res) {
                 console.log(res);
+                $("#uv").attr("class","");
                 $("#uv").text("UV Index: " + res.value);
                 if (res.value < 3) {
                     $("#uv").addClass("text-white bg-success");
