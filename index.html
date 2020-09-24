@@ -7,7 +7,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -22,14 +21,6 @@
       rel="stylesheet"
       type="text/css"
     />
-
-    <!-- Custom CSS -->
-    <link 
-      href="style.css"
-      rel="stylesheet" 
-      type="text/css" 
-    />
-
     <title>Weather Dashboard</title>
   </head>
   <body>
@@ -42,7 +33,6 @@
         >Weather Dashboard</a
       >
     </nav>
-
     <div class="container">
       <!-- Lines of code 38 through 47 loaded statically -->
       <div class="row">
@@ -59,18 +49,18 @@
           </div>
         </div>
       </div>
-      <!-- Dynamically loading html via JavaScript -->
+      <!-- Lines of code 54 through 61 dynamically loading html via JavaScript -->
       <div
         id="forecast-container"
-        class="d-flex justify-content-center justify-content-around pt-3"
+        class="d-flex flex-md-row flex-column justify-content-center justify-content-around pt-3"
       ></div>
       <div id="location-history">
+        <h4>Previous Searched Forecasts:</h4>
         <ul
-          class="location-list d-flex justify-content-center justify-content-around"
+          class="location-list d-flex justify-content-center list-group"
         ></ul>
       </div>
     </div>
-
     <!-- jQuery  -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Moment -->

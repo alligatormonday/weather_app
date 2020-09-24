@@ -2,7 +2,11 @@
 $(document).ready(function () {
     console.log("document loaded");
 
-    let APIKey = "ce818fa75a8998632b2becab04bcb211";
+    // Grabs last city searched from local storage
+    const lastSearch = window.localStorage.getItem("city");
+
+    // weatherSearch function with the last searched city from local storage
+    weatherSearch(lastSearch);
 
     // City Search/Submit Form
     const citySearch = `<form id="city-form" class="form-inline my-2 my-lg-0 pt-2">
@@ -19,16 +23,15 @@ $(document).ready(function () {
     // Click-Event to search for a city
     $("#city-form").on("submit", function (event) {
         event.preventDefault();
+
         // Clear the previous five day forecast
         $("#forecast-container").empty();
-
         let location = $("#city-input").val();
-
         weatherSearch(location);
 
-        // Creating buttons for searched cities and appends to HTML
+        // Creates dynamic buttons for searched cities and appends to HTML
         let forecastHistory = $("<button>");
-        forecastHistory.addClass("saved-location");
+        forecastHistory.addClass("saved-location my-2 btn btn-primary");
         forecastHistory.text($("#city-input").val());
         $(".location-list").append(forecastHistory);
         console.log(forecastHistory);
@@ -39,12 +42,16 @@ $(document).ready(function () {
         event.preventDefault();
         $("#forecast-container").empty();
         let locEle = $(this).text();
-
         weatherSearch(locEle);
     });
 
-    // Contains all AJAX calls
+    // Function for all AJAX calls and additional dynamic code
     function weatherSearch(location) {
+        let APIKey = "ce818fa75a8998632b2becab04bcb211";
+
+        // Saves most recent searched city to local storage
+        window.localStorage.setItem("city", location)
+
         // AJAX call to the OpenWeatherMap API
         let queryURL =
             "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -57,19 +64,14 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).then(function (response) {
-            // Log the queryURL
             console.log(queryURL);
-
-            // Log the resulting object
             console.log(response);
 
+            // Current day forecast
             $("#city").html("<h3>" + response.name + "</h3>");
-            $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
-            $("#humidity").text("Humidity: " + response.main.humidity + "%");
-
             $("#temp").text("Temperature: " + response.main.temp + " ℉");
-
-            // Log the data in the console
+            $("#humidity").text("Humidity: " + response.main.humidity + "%");
+            $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
             console.log("Wind Speed: " + response.wind.speed);
             console.log("Humidity: " + response.main.humidity);
             console.log("Temperature: " + temp);
@@ -88,6 +90,7 @@ $(document).ready(function () {
                 method: "GET",
             }).then(function (res) {
                 console.log(res);
+                // UV Index color for favorable, moderate, and severe
                 $("#uv").attr("class","");
                 $("#uv").text("UV Index: " + res.value);
                 if (res.value < 3) {
@@ -99,6 +102,7 @@ $(document).ready(function () {
                 }
                 console.log("UV");
 
+                // Five-Day Forecast
                 let fiveDayQuery =
                     "https://api.openweathermap.org/data/2.5/forecast?q=" +
                     location +
@@ -117,13 +121,14 @@ $(document).ready(function () {
                     console.log(list);
 
                     for (let i = 7; i < list.length; i++) {
-                        // Five Day Forecast cards
+                        // Five-Day Forecast cards
                         if ((i + 1) % 8 === 0) {
                             console.log(i);
                             // create variables from forecast data
                             let forecastDate = list[i].dt_txt.split(" ")[0];
                             // console.log(typeof forecastDate);
-                            // populate template with forecast data
+
+                            // Dynamic code to render five-day forecast response
                             let forecastDay = `<div class="text-white bg-warning mb-3" style="max-width: 20rem;">
                             <div class="card-body">
                             <h4 class="card-title">${forecastDate}</h4>
@@ -157,7 +162,3 @@ $(document).ready(function () {
 // THEN I am again presented with current and future conditions for that city
 // WHEN I open the weather dashboard
 // THEN I am presented with the last searched city forecast
-
-// $(".location-list").on("click", function(){
-//     weatherSearch();
-// })
