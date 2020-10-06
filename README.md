@@ -8,6 +8,12 @@
 * Bootstrap
 * Open Weather API
 
+## Deployment
+
+![Image of weather application](/image/screenshot.png)
+
+View deployment: [weather_app](https://alligatormonday.github.io/weather_app/)
+
 ## Description 
 
 This is my submission for my sixth homework assignment for the University of Arizona - Coding Bootcamp for Full-Stack Web Development program.
@@ -21,11 +27,7 @@ In this assignment I was tasked with creating a weather forecast application tha
 * Upon clicking on the city in the search history, the current and future conditions for that city are displayed again
 * When the application is reloaded, the most recent searched city forecast is displayed
 
-![Image of weather application](/image/screenshot.png)
-
 This assignment was created entirely from scratch using HTML, JavaScript, Moment.js and the Bootstrap framework.
-
-View deployment: [weather_app](https://alligatormonday.github.io/weather_app/)
 
 This was the most challenging assignment in the coding bootcamp thus far. I might have spent too much time on this assignment, especially during our first group project for our cohort. There were a few times that I was tempted to throw in the towel, but thankfully I had some help from my peers (credited below).
 
